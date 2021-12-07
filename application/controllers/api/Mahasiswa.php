@@ -65,4 +65,52 @@ class Mahasiswa extends REST_Controller {
     }
 
 
+
+    public function index_post() {
+        $data = [
+            'nrp' => $this->post('nrp'),
+            'nama' => $this->post('nama'),
+            'email' => $this->post('email'),
+            'jurusan' => $this->post('jurusan')
+        ];
+
+        if ($this->mhsModel->createMahasiswa($data) > 0) {
+            $this->response([
+                'status' => TRUE,
+                'message' => 'Data saved successfully'
+            ], REST_Controller::HTTP_CREATED);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Failed saving data'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+    }
+
+
+
+    public function index_put() {
+        $id = $this->put('id');
+
+        $data = [
+            'nrp' => $this->put('nrp'),
+            'nama' => $this->put('nama'),
+            'email' => $this->put('email'),
+            'jurusan' => $this->put('jurusan')
+        ];
+
+        if ($this->mhsModel->updateMahasiswa($data, $id) > 0) {
+            $this->response([
+                'status' => TRUE,
+                'message' => 'Data updated successfully'
+            ], REST_Controller::HTTP_NO_CONTENT);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Failed saving data'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+    }
 }
