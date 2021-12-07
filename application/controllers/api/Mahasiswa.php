@@ -13,7 +13,7 @@ class Mahasiswa extends REST_Controller {
         parent::__construct();
         $this->load->model('Mahasiswa_model', 'mhsModel');
 
-        $this->methods['index_get']['limit'] = 2;
+        $this->methods['index_get']['limit'] = 50; // 50 hit per hour
     }
 
 
